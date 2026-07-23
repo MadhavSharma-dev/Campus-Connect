@@ -17,6 +17,8 @@ import Feedback from './pages/Feedback';
 import Events from './pages/Events';
 import AdminDashboard from './pages/AdminDashboard';
 import Profile from './pages/Profile';
+import Attendance from './pages/Attendance';
+import Timetable from './pages/Timetable';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -28,6 +30,12 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) return null;
   return user?.role === 'admin' ? children : <Navigate to="/dashboard" />;
+};
+
+const StudentRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  return user?.role === 'admin' ? <Navigate to="/dashboard" /> : children;
 };
 
 const PublicRoute = ({ children }) => {
@@ -47,13 +55,15 @@ export default function App() {
             <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
             <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="cgpa" element={<CGPACalculator />} />
+              <Route path="cgpa" element={<StudentRoute><CGPACalculator /></StudentRoute>} />
               <Route path="food" element={<FoodOutlets />} />
               <Route path="resources" element={<Resources />} />
               <Route path="lost-found" element={<LostAndFound />} />
               <Route path="clubs" element={<Clubs />} />
               <Route path="feedback" element={<Feedback />} />
               <Route path="events" element={<Events />} />
+              <Route path="attendance" element={<StudentRoute><Attendance /></StudentRoute>} />
+              <Route path="timetable" element={<StudentRoute><Timetable /></StudentRoute>} />
               <Route path="profile" element={<Profile />} />
               <Route path="admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             </Route>

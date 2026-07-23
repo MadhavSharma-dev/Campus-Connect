@@ -5,7 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "predev": "fuser -k 5000/tcp || true",
     "dev": "nodemon server.js"
+  },
+  "nodemonConfig": {
+    "delay": 1000,
+    "ignore": ["node_modules", "uploads"]
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

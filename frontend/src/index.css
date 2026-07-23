@@ -30,4 +30,7 @@
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium;
   }
+  .label {
+    @apply block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1;
+  }
 }

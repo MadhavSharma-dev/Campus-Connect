@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     github: { type: String, default: '' },
     linkedin: { type: String, default: '' },
     specialisation: { type: String, default: '' },
+    section: { type: String, default: 'A' },
   },
   { timestamps: true }
 );

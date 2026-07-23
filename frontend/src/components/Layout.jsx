@@ -7,12 +7,15 @@ import {
   MagnifyingGlassIcon, UserGroupIcon, ChatBubbleLeftIcon,
   CalendarIcon, ShieldCheckIcon, UserCircleIcon,
   SunIcon, MoonIcon, Bars3Icon, XMarkIcon, ArrowRightOnRectangleIcon,
+  ClipboardDocumentCheckIcon, TableCellsIcon,
 } from '@heroicons/react/24/outline';
 import Logo from './Logo';
 
 const navItems = [
   { to: '/dashboard', icon: HomeIcon, label: 'Dashboard' },
-  { to: '/cgpa', icon: CalculatorIcon, label: 'CGPA Calculator' },
+  { to: '/cgpa', icon: CalculatorIcon, label: 'CGPA Calculator', studentOnly: true },
+  { to: '/attendance', icon: ClipboardDocumentCheckIcon, label: 'Attendance', studentOnly: true },
+  { to: '/timetable', icon: TableCellsIcon, label: 'Timetable', studentOnly: true },
   { to: '/food', icon: ShoppingBagIcon, label: 'Food Outlets' },
   { to: '/resources', icon: BookOpenIcon, label: 'Resources' },
   { to: '/lost-found', icon: MagnifyingGlassIcon, label: 'Lost & Found' },
@@ -39,7 +42,7 @@ export default function Layout() {
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {navItems.map(({ to, icon: Icon, label }) => (
+        {navItems.filter(item => !(item.studentOnly && user?.role === 'admin')).map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}

@@ -25,6 +25,8 @@ app.use('/api/feedback', require('./routes/feedback'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/orders', require('./routes/orders'));
+app.use('/api/attendance', require('./routes/attendance'));
+app.use('/api/timetable', require('./routes/timetable'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'OK', message: 'Campus Portal API running' }));
 
